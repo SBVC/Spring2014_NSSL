@@ -1,27 +1,30 @@
+#define DEBUG
+
 #include <string>
-#include <bitset>
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 int main() {
-	string in;
+	string line;
 	int key;
-	string out;
 
-	cout<<"Enter some text to encryptify or decryptify."<<endl;
-	getline(cin,in);
-	out=in;
-	cout<<"Enter a key to use (integer): ";
+	cout<<"Enter a line to encrypt:"<<endl;
+	getline(cin,line);
+
+	cout<<endl<<"Enter an key (integer) to encrypt with: ";
 	cin>>key;
 
-	for (int i=0;i<in.size();i++) {
-		key++;
-		out[i]=in[i]^key;
-	}
+	for (int i=0;i<line.size();i++)
+		line[i]^=key++;
 
-	cout<<"Your encryptified text:"<<endl<<endl;
-	cout<<out<<endl<<endl;
+	cout<<endl<<"Your encrypted line:"<<endl<<endl;
+	cout<<line;
 
+	#ifdef DEBUG
+	cout<<endl<<endl;
 	system("pause");
+	#endif
+
 	return 0;
 }
