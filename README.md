@@ -9,6 +9,7 @@ It's also under the GPL v3 license because it is important to license things.
 Ideas
 ----
 - Random number generation option for key
+- ROT13 optional extra layer of encryption
 
 Requirements
 ----
