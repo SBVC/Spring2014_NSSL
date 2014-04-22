@@ -14,14 +14,14 @@ int main() {
 	do {
 		getline(cin,line);
 		data+=line;
-	}while(line.length()!=0);
+	}while(line.length()!=0);//dafuq u doin bish(to paul)
 
 	cout<<endl<<"Enter an key (integer) to encrypt with: ";
 	cin>>key;
 	#ifdef DEBUG
 	cout<<"Key used: "<<key<<endl;
 	#endif // DEBUG
-
+	 
 	for (int i=0;i<data.size();i++) {
 		data[i]^=key++;
 		#ifdef DEBUGverbose
