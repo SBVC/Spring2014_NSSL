@@ -16,3 +16,8 @@ Requirements
 - Needs to use classes
 - Option: encrypt or decrypt
 - Program flow: continue or terminate
+
+Check this "Chat" part, possibly we will use this library:
+http://www.boost.org/doc/libs/1_44_0/doc/html/boost_asio/examples.html
+
+Read this: http://stackoverflow.com/questions/244453/best-documentation-for-boostasio
