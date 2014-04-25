@@ -31,13 +31,21 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="C:/Users/admin/Documents/GitHub/NSSL/" />
 		</Compiler>
+		<Unit filename=".gitattributes">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename=".gitignore">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="LICENSE">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="README.md">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="class.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

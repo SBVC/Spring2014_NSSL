@@ -4,33 +4,28 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <class.h>
 using namespace std;
 
 int main() {
-	string line,data;
-	int key=0; //default key of zero
+	string input;
+	secretData text;
+	short key=0; //default key of zero
 
-	cout<<"Enter data to encrypt (hitting enter twice stops input):"<<endl;
+	cout<<"Welcome to Secret Note program."<<endl;
+
+	//this is where we would connect to a server/client or whatever
+	//cout<<"Enter a key for this communication: "; //this will be changed probably
+	//cin>>key; //this is a horrible way to get input but whatever
+
 	do {
-		getline(cin,line);
-		data+=line;
-	}while(line.length()!=0);//dafuq u doin bish(to paul)
+		cout<<"# "; //prompt for input
+		getline(cin,input);
 
-	cout<<endl<<"Enter an key (integer) to encrypt with: ";
-	cin>>key;
-	#ifdef DEBUG
-	cout<<"Key used: "<<key<<endl;
-	#endif // DEBUG
-	 
-	for (int i=0;i<data.size();i++) {
-		data[i]^=key++;
-		#ifdef DEBUGverbose
-		cout<<"Char:"<<line[i]<<"\t"<<"Key:"<<key<<endl;
-		#endif // DEBUG
-	}
-
-	cout<<endl<<"Your encrypted data:"<<endl<<endl;
-	cout<<data;
+		text.encrypt(input,key);
+		text.printEncryptedData(); //temporary
+		text.printData(); // temporary as well
+	}while(input.length()!=0); //continue until null input
 
 	#ifdef DEBUG
 	cout<<endl<<endl;
