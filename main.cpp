@@ -23,8 +23,8 @@ int main() {
 		getline(cin,input);
 
 		text.encrypt(input,key);
-		text.printEncryptedData(); //temporary
-		text.printData(); // temporary as well
+		cout<<"  ";text.printEncryptedData(); //temporary
+		cout<<"  ";text.printData(); // temporary as well
 	}while(input.length()!=0); //continue until null input
 
 	#ifdef DEBUG
