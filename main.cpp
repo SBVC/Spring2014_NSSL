@@ -9,9 +9,9 @@
 using namespace std;
 
 int main() {
-	string input;
-	secretData text;
-	short key=0; //default key of zero
+	//string input;
+	//secretData text;
+	//short key=0; //default key of zero
 
 	cout<<"Welcome to Secret Note program."<<endl;
 	secretData sd;

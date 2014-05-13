@@ -1,7 +1,41 @@
 //#define DEBUG
 //#define DEBUGverbose
 
-#include <string>
+#include <>
+using namespace std;
+
+class NSSL{
+	protected:
+		long dataKey;
+		string encryptedData;
+	public:
+		bool NSSL(string input,long key);
+		string decrypt();
+		// create
+		//bool encrypt(string input,long dataKey);
+};
+NSSL::NSSL(string input,long key){
+	//create key and encrypt input and store it
+}
+//NSSL::decrypt()
+
+/*class N{
+	protected:
+		//
+	public:
+		//
+};
+void S(N a){
+	//
+}
+void S(L a){
+	//
+}
+class L: public N{
+	//
+};*/
+
+/*#include <string>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
