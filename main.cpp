@@ -23,7 +23,7 @@ int main() {
 
 	#ifdef DEBUG
 	cout<<endl<<endl;
-	system("pause");
+	system("pause"); // doesn't work in Linux needs fix
 	#endif // DEBUG
 
 	return 0;
