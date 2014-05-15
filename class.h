@@ -1,23 +1,47 @@
 //#define DEBUG
 //#define DEBUGverbose
 
-#include <>
+#include <string>
+#include <sstream>
 using namespace std;
 
 class NSSL{
 	protected:
-		long dataKey;
+		string dataKey;
 		string encryptedData;
 	public:
-		bool NSSL(string input,long key);
+		NSSL(string input,long key);
 		string decrypt();
-		// create
-		//bool encrypt(string input,long dataKey);
+		bool printEncrypted();
+		bool printDecrypted();
 };
 NSSL::NSSL(string input,long key){
-	//create key and encrypt input and store it
+	dataKey = static_cast<ostringstream*>( &(ostringstream() << key) )->str();
+	for (int i=0;i<input.length();i++) {
+		for (int j=0;j<dataKey.length();j++) {
+			encryptedData[i]^=dataKey[j];
+			i++;
+		}
+	}
 }
-//NSSL::decrypt()
+string NSSL::decrypt(){
+	string tmp;
+	for (int i=0;i<encryptedData.length();i++){
+		for (int j=0;j<dataKey.length();j++){
+			tmp[i]^=dataKey[j];
+			i++;
+		}
+	}
+	return tmp;
+}
+bool NSSL::printEncrypted(){
+	cout<<encryptedData;
+	return true;
+}
+bool NSSL::printDecrypted(){
+	cout<<decrypt();
+	return true;
+}
 
 /*class N{
 	protected:
