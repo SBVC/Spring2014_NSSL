@@ -1,5 +1,4 @@
 #define DEBUG
-//#define DEBUGverbose
 
 #include <string>
 #include <iostream>
@@ -10,23 +9,24 @@ using namespace std;
 
 int main() {
 	string input;
-	secretData text;
-	short key=0; //default key of zero
+	//secretData text;
+	//short key=0; //default key of zero
+	long key=1337; //temporary, needs to be able to be specified or generated
 
 	cout<<"Welcome to Secret Note program."<<endl;
-
-	//this is where we would connect to a server/client or whatever
-	//cout<<"Enter a key for this communication: "; //this will be changed probably
-	//cin>>key; //this is a horrible way to get input but whatever
 
 	do {
 		cout<<"# "; //prompt for input
 		getline(cin,input);
 
-		text.encrypt(input,key);
+		//text.encrypt(input,key);
 		NSSL data(input,key);
-		cout<<"  ";text.printEncryptedData(); //temporary
-		cout<<"  ";text.printData(); // temporary as well
+		#ifdef DEBUG
+		data.printEncrypted();
+		//data.printDecrypted();
+		#endif // DEBUG
+		//cout<<"  ";text.printEncryptedData(); //temporary
+		//cout<<"  ";text.printData(); // temporary as well
 	}while(input.length()!=0); //continue until null input
 
 	#ifdef DEBUG

@@ -51,8 +51,7 @@ bool NSSL::printEncrypted(){
     return true;
 }
 bool NSSL::printDecrypted(){
-    cout<<"totally not broked";
-    //cout<<decrypt();
+    cout<<decrypt();
     return true;
 }
 
