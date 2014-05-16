@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 class NSSL{
@@ -16,6 +18,7 @@ class NSSL{
         string decrypt();
         void printEncrypted();
         void printDecrypted();
+        static long generateKey();
 };
 
 NSSL::NSSL(string input,long key){
@@ -50,4 +53,12 @@ void NSSL::printEncrypted(){
 }
 void NSSL::printDecrypted(){
     cout<<"  "<<decrypt()<<endl;
+}
+long NSSL::generateKey(){
+    srand(time(NULL));
+    long key=rand()*1254785104821482321;
+    #ifdef DEBUG
+    cout<<key<<endl;
+    #endif // DEBUG
+    return key;
 }
