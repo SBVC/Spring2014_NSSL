@@ -13,7 +13,6 @@ Ideas
 
 Requirements
 ----
-- Needs to use classes
 - Option: encrypt or decrypt
 - Program flow: continue or terminate
 

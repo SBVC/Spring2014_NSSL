@@ -2,6 +2,7 @@
 //#define DEBUGverbose
 
 #include <string>
+#include <iostream>
 #include <sstream>
 using namespace std;
 
@@ -11,23 +12,41 @@ class NSSL{
 		string encryptedData;
 	public:
 		NSSL(string input,long key);
+		bool encrypt(string input,long key);
 		string decrypt();
 		bool printEncrypted();
 		bool printDecrypted();
-};
+} data("test",13);
+
 NSSL::NSSL(string input,long key){
+    encrypt(input,key);
+	/*
 	dataKey = static_cast<ostringstream*>( &(ostringstream() << key) )->str();
 	for (int i=0;i<input.length();i++) {
 		for (int j=0;j<dataKey.length();j++) {
+            //this may break when encryptedData[i] doesn't exist/goes past the length of the string
+            //it will either use 0's and print chaos, or break entirely
 			encryptedData[i]^=dataKey[j];
 			i++;
 		}
 	}
+	*/
+}
+bool NSSL::encrypt(string input,long key){
+    dataKey = static_cast<ostringstream*>( &(ostringstream() << key) )->str();
+	for (int i=0;i<input.length();i++) {
+		for (int j=0;j<dataKey.length();j++,i++) {
+			if (i==input.length()) return true;
+			encryptedData[i]^=dataKey[j];
+		}
+	}
+	return true;
 }
 string NSSL::decrypt(){
 	string tmp;
 	for (int i=0;i<encryptedData.length();i++){
 		for (int j=0;j<dataKey.length();j++){
+            //this has same potential problem as creating it
 			tmp[i]^=dataKey[j];
 			i++;
 		}
@@ -90,7 +109,7 @@ void secretData::main(){
 	cout<<"Please enter 1 to generate a new key or 2 to enter your provided key:"<<endl;
 	cout<<"# "; //prompt for input
 	cin >> input;
-	
+
 	switch (input)
 	{
 	case 1 : generateKey(); //this should call secretData::generateKey(); when 1 is entered
@@ -106,7 +125,7 @@ void secretData::choose(){
 	cout<<"Please enter 1 to encrypt a new message or 2 to decrypt a past message"<<endl;
 	cout<<"# "; //prompt for input
 	cin >> input;
-	
+
 	switch (input)
 	{
 	case 1 : encryptMessage(); //this should call secretData::encryptMessage(); when 1 is entered
@@ -129,20 +148,20 @@ void secretData::decrypt() {
 	}
     myfile.close();
   }
-  else cout << "Unable to open file"; 
+  else cout << "Unable to open file";
   encrypt(encryptedData,dataKey);
   cout << encryptedData << endl;
 }
 
 void secretData::generateKey(){
 	//code should generate a number between 1111 and 9999
-	srand((unsigned)time(0)); 
-	short random_integer; 
-	short lowest=1111, highest=9999; 
-	short range=(highest-lowest)+1; 
-	random_integer = lowest+int(range*rand()/(RAND_MAX + 1.0)); 
+	srand((unsigned)time(0));
+	short random_integer;
+	short lowest=1111, highest=9999;
+	short range=(highest-lowest)+1;
+	random_integer = lowest+int(range*rand()/(RAND_MAX + 1.0));
 	key = random_integer; //set dataKey to new random number
-	dataKey=(key * 1254785104821482321); 
+	dataKey=(key * 1254785104821482321);
 	cout << "Your new key is now: " << key << endl; //tell user the new number
 	cout << "Your real key is: " << dataKey << endl;
 	encryptMessage();
@@ -180,7 +199,7 @@ void secretData::setKey(){
 		}
 	}while(test=0);
 	key=input;
-	dataKey=(key * 1254785104821482321); 
+	dataKey=(key * 1254785104821482321);
 	cout<<"key accepted";
 	choose();
 }

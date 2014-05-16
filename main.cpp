@@ -2,8 +2,10 @@
 //#define DEBUGverbose
 
 
+#include <string>
 #include <iostream>
 #include <cstdlib>
+#include <stdio.h>
 #include "class.h"
 //#include <ctime>
 using namespace std;
@@ -17,23 +19,30 @@ int main() {
 	cout<<"Welcome to Secret Note program."<<endl;
 	//secretData sd;
 	//sd.main();
-	
+
 	//this is where we would connect to a server/client or whatever
 	//cout<<"Enter a key for this communication: "; //this will be changed probably
 	//cin>>key; //this is a horrible way to get input but whatever
 
 	do {
 		cout<<"# ";
-		cin>>input;
-		//data=NSSL(input,key);
-		NSSL(input,key);
-		//
-	}while(input.length()!=true);
+		//cin>>input;
+		getline(cin,input);
+		data.encrypt(input,key);
 
-	#ifdef DEBUG
-	cout<<endl<<endl;
-	system("pause"); // doesn't work in Linux needs fix
-	#endif // DEBUG
+        //#ifdef DEBUG
+		data.printEncrypted();
+		data.printDecrypted();
+		//#endif
+
+	}while(input.length()!=0);
+
+	//#ifdef DEBUG
+	cout<<"\n"<<endl;
+	//system("pause"); // doesn't work in Linux needs fix
+	cout<<"Press any key to continue . . . ";
+	getchar();	cout<<"\b";
+	//#endif
 
 	return 0;
 }
