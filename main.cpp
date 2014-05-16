@@ -19,14 +19,14 @@ int main() {
 		cout<<"# "; //prompt for input
 		getline(cin,input);
 
-		//text.encrypt(input,key);
 		NSSL data(input,key);
+
 		#ifdef DEBUG
-		data.printEncrypted();
+		cout<<data.getEncrypted();
+		//data.printEncrypted();
 		//data.printDecrypted();
 		#endif // DEBUG
-		//cout<<"  ";text.printEncryptedData(); //temporary
-		//cout<<"  ";text.printData(); // temporary as well
+
 	}while(input.length()!=0); //continue until null input
 
 	#ifdef DEBUG
