@@ -22,7 +22,6 @@ int main() {
 		NSSL data(input,key);
 
 		#ifdef DEBUG
-		cout<<data.getEncrypted();
 		//data.printEncrypted();
 		//data.printDecrypted();
 		#endif // DEBUG
