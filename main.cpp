@@ -9,8 +9,6 @@ using namespace std;
 
 int main() {
 	string input;
-	//secretData text;
-	//short key=0; //default key of zero
 	long key=1337; //temporary, needs to be able to be specified or generated
 
 	cout<<"Welcome to Secret Note program."<<endl;
@@ -22,8 +20,8 @@ int main() {
 		NSSL data(input,key);
 
 		#ifdef DEBUG
-		//data.printEncrypted();
-		//data.printDecrypted();
+		data.printEncrypted();
+		data.printDecrypted();
 		#endif // DEBUG
 
 	}while(input.length()!=0); //continue until null input
