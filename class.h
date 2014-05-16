@@ -3,8 +3,60 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
 using namespace std;
 
+class NSSL{
+    protected:
+        string dataKey;
+        string encryptedData;
+    public:
+        NSSL(string input,long key);
+        bool encrypt(string input,long key);
+        string decrypt();
+        bool printEncrypted();
+        bool printDecrypted();
+};
+
+NSSL::NSSL(string input,long key){
+    encrypt(input,key);
+}
+bool NSSL::encrypt(string input,long key){
+    ostringstream long2string;
+    long2string<<key;
+    dataKey=long2string.str();
+    //dataKey = static_cast<ostringstream*>( &(ostream() << key) )->str();
+    for (int i=0;i<input.length();i++){
+        for (int j=0;j<dataKey.length();j++){
+            encryptedData[i]^=dataKey[j];
+            i++;
+            if (i==input.length()) return true;
+        }
+    }
+    return true;
+}
+string NSSL::decrypt(){
+    string tmp;
+    for (int i=0;i<encryptedData.length();i++){
+        for (int j=0;j<dataKey.length();j++){
+            tmp[i]^=dataKey[j];
+            i++;
+            if (i==encryptedData.length()) return tmp;
+        }
+    }
+    return tmp;
+}
+bool NSSL::printEncrypted(){
+    cout<<encryptedData;
+    return true;
+}
+bool NSSL::printDecrypted(){
+    cout<<"totally not broked";
+    //cout<<decrypt();
+    return true;
+}
+
+//below here is old
 class secretData{
 	protected:
 		short dataKey;

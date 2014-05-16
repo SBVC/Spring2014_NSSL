@@ -24,6 +24,7 @@ int main() {
 		getline(cin,input);
 
 		text.encrypt(input,key);
+		NSSL data(input,key);
 		cout<<"  ";text.printEncryptedData(); //temporary
 		cout<<"  ";text.printData(); // temporary as well
 	}while(input.length()!=0); //continue until null input
