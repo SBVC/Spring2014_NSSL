@@ -15,6 +15,7 @@ class NSSL{
     public:
         NSSL(string input,long key);
         void encrypt(string input,long key);
+        void rawInput(string input);
         string decrypt();
         void printEncrypted();
         void printDecrypted();
@@ -37,6 +38,9 @@ void NSSL::encrypt(string input,long key){
         }
     }
 }
+void NSSL::rawInput(string input){
+    encryptedData+=input;
+}
 string NSSL::decrypt(){
     string tmp=encryptedData;
     for (int i=0;i<encryptedData.size();i++){
@@ -49,10 +53,10 @@ string NSSL::decrypt(){
     return tmp;
 }
 void NSSL::printEncrypted(){
-    cout<<"  "<<encryptedData<<endl;
+    cout<<encryptedData<<endl;
 }
 void NSSL::printDecrypted(){
-    cout<<"  "<<decrypt()<<endl;
+    cout<<decrypt()<<endl;
 }
 long NSSL::generateKey(){
     srand(time(NULL));
