@@ -26,7 +26,7 @@ int main() {
         switch(in){
             case 'g': case 'G':
                 key=NSSL::generateKey();
-                cout<<"Your key is: "<<key;
+                cout<<"Your key is: "<<key<<"\n";
                 in='0';
                 break;
             case 'e': case 'E':
@@ -46,9 +46,14 @@ int main() {
         in=getch();
         switch(in){
             case 'd': case 'D':
+                neverUseLabelsAndGotos:
                 cout<<"Enter file name: ";
                 getline(cin,filename);
-                if (openFileAndDecrypt(filename)) in='0';
+                if (openFileAndDecrypt(filename)) {
+                    in='0';}
+                else {
+                    goto neverUseLabelsAndGotos;
+                }
                 break;
             case 'e': case 'E':
                 //make ending done with "/done" on a line by itself instead of an empty line
@@ -88,11 +93,15 @@ int main() {
 }
 
 bool openFileAndDecrypt(string filename){
+    NSSL data("blah",123); //this is bullshit
     //this assumes data is defined and accessible to it
     //it probably is neither, rewrite class to allow constructing uninitialized object
     //make data at beginning and accessible to everything
     string line;
-    ifstream file(filename);
+    ifstream file(filename.c_str());
+    //ifstream file;
+    //file.open(filename);
+    //ifstream file("test.txt");
     if (file.is_open()){
         while(getline(file,line)){
             //add to encrypted data
@@ -103,6 +112,6 @@ bool openFileAndDecrypt(string filename){
         data.printDecrypted();
         return true;
     }
-    cout<<"Error. File did not open."<<endl;
+    cout<<"Error: File did not open."<<endl;
     return false;
 }
