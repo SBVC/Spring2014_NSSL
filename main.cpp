@@ -51,6 +51,7 @@ int main() {
                 if (openFileAndDecrypt(filename)) in='0';
                 break;
             case 'e': case 'E':
+                //make ending done with "/done" on a line by itself instead of an empty line
                 //prompt (as below) for text until empty message,
                 //then encrypt and output to a file
                 in='0';
@@ -87,15 +88,19 @@ int main() {
 }
 
 bool openFileAndDecrypt(string filename){
+    //this assumes data is defined and accessible to it
+    //it probably is neither, rewrite class to allow constructing uninitialized object
+    //make data at beginning and accessible to everything
     string line;
     ifstream file(filename);
     if (file.is_open()){
         while(getline(file,line)){
             //add to encrypted data
-            data.rawInput(line);
+            data.rawInput(line); //this may need a +"\n" added to it to work properly
         }
         file.close();
         //decrypt and display
+        data.printDecrypted();
         return true;
     }
     cout<<"Error. File did not open."<<endl;
