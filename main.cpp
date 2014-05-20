@@ -9,12 +9,11 @@
 using namespace std;
 
 int main();
-bool openFileAndDecrypt(string filename);
+bool openFileAndDecrypt(string filename,NSSL data);
 
 int main() {
 	char in;
-	string input;
-	string filename;
+	string input,text,filename;
 	long key;
 
 	NSSL data;
@@ -28,12 +27,14 @@ int main() {
 		switch(in){
 			case 'g': case 'G':
 				data.generateKey();
-				cout<<"Your key is: "<<key<<"\n";
+				cout<<"Your key is: "<<data.getKey()<<"\n";
 				in='0';
 				break;
 			case 'e': case 'E':
 				cout<<"Enter your key: ";
-				cin>>key;
+				cin>>key; //can you pipe straight into a function? replace this with that if possible
+				//cin>>data.setKey(); //or//data.setKey(cin); //??
+				data.setKey(key);
 				in='0';
 				break;
 			case '0':
@@ -50,8 +51,10 @@ int main() {
 			case 'd': case 'D':
 				neverUseLabelsAndGotos:
 				cout<<"Enter file name: ";
+				//flush cin here?
+				//cin.clear(); cin.ignore(100000,'\n');
 				getline(cin,filename);
-				if (openFileAndDecrypt(filename)) {
+				if (openFileAndDecrypt(filename,data)) {
 					in='0';}
 				else {
 					goto neverUseLabelsAndGotos;
@@ -61,6 +64,32 @@ int main() {
 				//make ending done with "/done" on a line by itself instead of an empty line
 				//prompt (as below) for text until empty message,
 				//then encrypt and output to a file
+				cout<<"Enter text to be encrypted: (type /done on a line by itself to exit)"<<endl;
+				//input="something"; //to keep it from somehow being /done already (this isn't needed)
+				do {
+                    cout<<"# ";
+                    getline(cin,input); //does this give newlines?
+                    if (input=="/done") break;
+                    text+=input+"\n";
+				}while(input!="/done"); //change to true
+				data.encrypt(text);
+				//now save it to file
+				cout<<"Encrypted. ";
+            labelsAreReallyBad:
+                cout<<"Enter filename to output to: ";
+                //flush cin here as well most likely
+                //cin.clear(); cin.ignore(100000,'\n');
+				getline(cin,filename);
+				{ofstream file(filename.c_str());
+				if (file.is_open()){
+                    file<<data.getData();
+                    file.close();
+                    cout<<"Output complete.\n";
+				} else {
+				    cout<<"File error: Could not open file.";
+				    goto labelsAreReallyBad;
+				}}
+				//display message about finished
 				in='0';
 				break;
 			default:
@@ -68,12 +97,12 @@ int main() {
 		}
 	}while(in!='0');
 
-	cout<<"\n\n"<<"Press any key to exit . . . "<<endl;
+	cout/*<<"\n\n"*/<<"Press any key to exit . . . "<<endl;
 	getch();
 
 	//THIS IS EXIT OF PROGRAM, REMOVE BELOW WHEN IT HAS BEEN ADDED TO APPROPRIATE PLACE
 
-	do {
+	/*do {
 		cout<<"# "; //prompt for input
 		getline(cin,input);
 
@@ -84,25 +113,17 @@ int main() {
 		cout<<"  "; data.printDecrypted();
 		#endif // DEBUG
 
-	}while(input.size()!=0); //continue until null input
+	}while(input.size()!=0); //continue until null input*/
 
 	return 0;
 }
 
-bool openFileAndDecrypt(string filename){
-	NSSL data("blah",123); //this is bullshit
-	//this assumes data is defined and accessible to it
-	//it probably is neither, rewrite class to allow constructing uninitialized object
-	//make data at beginning and accessible to everything
+bool openFileAndDecrypt(string filename,NSSL data){
 	string line;
 	ifstream file(filename.c_str());
-	//ifstream file;
-	//file.open(filename);
-	//ifstream file("test.txt");
 	if (file.is_open()){
 		while(getline(file,line)){
-			//add to encrypted data
-			data.addData(line); //this may need a +"\n" added to it to work properly
+			data.addData(line+"\n"); //this may need a +"\n" added to it to work properly
 		}
 		file.close();
 		//decrypt and display

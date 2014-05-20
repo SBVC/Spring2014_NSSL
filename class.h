@@ -16,21 +16,27 @@ class NSSL{
 		NSSL(){}
 		NSSL(string input,long key);
 		void encrypt(string input,long key);
+		void encrypt(string input);
 		void addData(string input);
+		string getData();
 		string decrypt();
-		void printEncrypted();
-		void printDecrypted();
-		static long generateKey();
+		void printEncrypted();//dumb
+		void printDecrypted();//dumb
+		//static long generateKey();
+		void generateKey();
+		void setKey(long key);
+		string getKey();
 };
 
 NSSL::NSSL(string input,long key){
 	encrypt(input,key);
 }
 void NSSL::encrypt(string input,long key){
-	ostringstream long2string;
-	long2string<<key;
-	dataKey=long2string.str();
-	encryptedData=input;
+	setKey(key);
+	encrypt(input);
+}
+void NSSL::encrypt(string input){
+    encryptedData=input;
 	for (int i=0;i<input.size();i++){
 		for (int j=0;j<dataKey.size();j++){
 			encryptedData[i]^=dataKey[j]^i;
@@ -41,6 +47,9 @@ void NSSL::encrypt(string input,long key){
 }
 void NSSL::addData(string input){
 	encryptedData+=input;
+}
+string NSSL::getData(){
+    return encryptedData;
 }
 string NSSL::decrypt(){
 	string tmp=encryptedData;
@@ -59,11 +68,21 @@ void NSSL::printEncrypted(){
 void NSSL::printDecrypted(){
 	cout<<decrypt()<<endl;
 }
-long NSSL::generateKey(){
+//long NSSL::generateKey(){
+void NSSL::generateKey(){
 	srand(time(NULL));
 	long key=rand()*1254785104821482321;
 	#ifdef DEBUG
 	cout<<key<<endl;
 	#endif // DEBUG
-	return key;
+	//return key;
+	setKey(key);
+}
+void NSSL::setKey(long key){
+	ostringstream long2string;
+	long2string<<key;
+	dataKey=long2string.str();
+}
+string NSSL::getKey(){
+	return dataKey;
 }
