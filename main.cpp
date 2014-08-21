@@ -93,7 +93,7 @@ int main() {
 }
 
 bool openFileAndDecrypt(string filename){
-    NSSL data("blah",123); //this is bullshit
+    NSSL data;
     //this assumes data is defined and accessible to it
     //it probably is neither, rewrite class to allow constructing uninitialized object
     //make data at beginning and accessible to everything

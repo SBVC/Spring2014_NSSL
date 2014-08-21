@@ -13,6 +13,7 @@ class NSSL{
         string dataKey;
         string encryptedData;
     public:
+        NSSL(){}
         NSSL(string input,long key);
         void encrypt(string input,long key);
         void rawInput(string input);
@@ -21,7 +22,6 @@ class NSSL{
         void printDecrypted();
         static long generateKey();
 };
-
 NSSL::NSSL(string input,long key){
     encrypt(input,key);
 }
